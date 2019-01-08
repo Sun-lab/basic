@@ -1,0 +1,13 @@
+Package: basic
+Type: Package
+Title: intra-tumor-heterogeneity by Bulk tumor and Single Cell
+        sequencing data
+Version: 0.99.002
+Date: 2017-08-04
+Author: Wei Sun 
+Maintainer: Wei Sun <weisun2013@gmail.com>
+Description: Inference of intra-tumor-heterogeneity by sequencing data from Bulk tumor and single cells. 
+Depends: VGAM, MASS
+License: GPL (>= 2)
+NeedsCompilation: yes
+Packaged: 2017-11-10 05:51:12 UTC; wsun

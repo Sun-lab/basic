@@ -1,0 +1,279 @@
+Patient	Chromosome	Position	Reference	Variant	Confirmed.Normal.Var.Freq	Confirmed.Tumor.Var.Freq	Gene	Type	Effect	refCount	altCount	totalCount	lowMAPQDepth	lowBaseQDepth	rawDepth	otherBases	improperPairs
+Patient 1	chr1	151512803	G	A	0	19.7	TUFT1	UTR5	NA	74	13	87	0	0	87	0	0
+Patient 1	chr1	151735456	C	T	0.3	29.4	OAZ3	UTR5	NA	113	39	152	0	0	152	0	0
+Patient 1	chr1	24390601	G	A	0	23.3	MYOM3	coding	stopgain SNV	35	13	48	0	0	48	0	0
+Patient 1	chr12	81013241	C	G	0	25.8	PTPRQ	coding	nonsynonymous SNV	36	5	41	0	0	41	0	0
+Patient 1	chr1	38226084	C	A	0	20.6	EPHA10	UTR3	NA	24	6	30	0	0	31	0	1
+Patient 1	chr14	70418996	G	A	0.2	19.2	SMOC1	coding	nonsynonymous SNV	66	20	86	0	0	87	1	0
+Patient 1	chr15	33952506	C	T	0.7	47.3	RYR3	coding	nonsynonymous SNV	71	54	125	0	0	125	0	0
+Patient 1	chr15	73021943	G	T	0	19.7	BBS4	intronic	NA	39	9	48	0	0	48	0	0
+Patient 1	chr16	320709	G	A	0.4	20.1	RGS11	intronic	NA	25	7	32	0	0	32	0	0
+Patient 1	chr17	1657484	G	A	0.1	20.7	SERPINF2	coding	nonsynonymous SNV	27	23	50	0	0	50	0	0
+Patient 1	chr19	38103617	G	A	0	20.7	ZNF540	coding	nonsynonymous SNV	24	8	32	0	0	34	0	2
+Patient 1	chr19	40895668	G	A	0.2	32.7	HIPK4	coding	nonsynonymous SNV	68	28	96	0	0	99	0	3
+Patient 1	chr2	170493981	A	C	0.2	23.4	PPIG	coding	nonsynonymous SNV	29	6	35	0	0	38	0	3
+Patient 1	chr2	179615995	G	A	0.3	29.3	TTN	coding	nonsynonymous SNV	13	5	18	0	0	20	0	2
+Patient 1	chr3	51263127	G	A	0	19.1	DOCK3	coding	nonsynonymous SNV	37	9	46	0	0	46	0	0
+Patient 1	chr6	133850054	C	A	0	10.1	EYA4	UTR3	NA	25	3	28	0	0	28	0	0
+Patient 1	chr6	27101163	C	T	0.2	19	HIST1H2AG	coding	stopgain SNV	31	5	36	0	0	38	0	2
+Patient 1	chr8	120255800	C	G	0	48.3	MAL2	UTR3	NA	2	6	8	0	0	9	0	1
+Patient 1	chr8	95877709	G	A	0	25.8	INTS8	intronic	NA	7	3	10	0	0	10	0	0
+Patient 1	chr9	138702709	C	T	0	16.9	CAMSAP1	UTR3	NA	54	6	60	0	0	62	0	2
+Patient 2	chr10	117154148	C	A	0	5.4	ATRNL1	intronic	NA	14	2	16	0	0	17	0	1
+Patient 2	chr11	27698664	T	A	0.5	14.9	BDNF-AS	ncRNA	NA	90	12	102	0	0	102	0	0
+Patient 2	chr11	6622747	T	G	0.3	11.1	RRP8	coding	nonsynonymous SNV	35	8	43	0	0	43	0	0
+Patient 2	chr12	32793457	C	A	0.2	14.5	FGD4	coding	stopgain SNV	14	3	17	0	0	17	0	0
+Patient 2	chr15	88122589	G	T	0.3	5	LINC00052	ncRNA	NA	19	2	21	0	0	21	0	0
+Patient 2	chr19	51917709	G	A	0.4	46.7	SIGLEC10	coding	nonsynonymous SNV	34	23	57	0	0	57	0	0
+Patient 2	chr2	220440226	C	T	0.8	10.2	INHA	coding	nonsynonymous SNV	63	10	73	0	0	73	0	0
+Patient 2	chr3	32280281	C	T	0	20.8	CMTM8	UTR5	NA	109	14	123	0	0	123	0	0
+Patient 2	chr4	31148165	C	T	0.3	14.7	PCDH7	UTR3	NA	26	3	29	0	0	30	0	1
+Patient 2	chr5	14612901	G	A	0.4	21.9	FAM105A	UTR3	NA	38	5	43	0	0	43	0	0
+Patient 2	chr6	118822648	T	A	0.4	11.8	BRD7P3	ncRNA	NA	73	11	84	0	0	86	0	2
+Patient 2	chr7	98575882	G	A	0	4	TRRAP	coding	nonsynonymous SNV	56	4	60	0	0	60	0	0
+Patient 2	chr8	105025789	T	G	0.6	47.1	RIMS2	coding	nonsynonymous SNV	20	22	42	0	0	43	0	1
+Patient 2	chr8	144550709	G	A	0.5	13.2	ZC3H3	coding	nonsynonymous SNV	31	6	37	0	0	37	0	0
+Patient 2	chr8	144995042	C	A	0.3	48.7	PLEC	coding	nonsynonymous SNV	20	23	43	0	0	43	0	0
+Patient 2	chr8	21827088	G	A	0.6	13.2	XPO7(NM_015024:exon3:c.259+1G>A)	splicing	NA	30	8	38	0	0	39	0	1
+Patient 3	chr10	102054837	G	A	0	55	PKD2L1	coding	nonsynonymous SNV	27	10	37	0	0	37	0	0
+Patient 3	chr10	118314728	G	C	0	25.4	PNLIP	coding	nonsynonymous SNV	64	16	80	0	0	80	0	0
+Patient 3	chr1	154909167	C	A	0	36.1	PMVK	UTR5	NA	22	30	52	0	0	54	0	2
+Patient 3	chr11	61405741	G	A	0	11.7	RPLP0P2	ncRNA	NA	47	8	55	0	0	57	0	2
+Patient 3	chr12	113830893	G	A	0	57.5	SDS	coding	synonymous SNV	26	21	47	0	0	47	0	0
+Patient 3	chr12	280389	C	T	0	42.2	IQSEC3	intronic	NA	32	32	64	0	0	65	0	1
+Patient 3	chr1	247587279	G	C	0	36.7	NLRP3	coding	synonymous SNV	188	31	219	0	0	219	0	0
+Patient 3	chr13	53050218	C	G	0	25.1	CKAP2	UTR3	NA	70	4	74	0	0	74	0	0
+Patient 3	chr14	42356474	T	A	0	32.6	LRFN5	coding	nonsynonymous SNV	35	15	50	0	0	51	0	1
+Patient 3	chr14	45564595	G	A	0	30.6	PRPF39	coding	synonymous SNV	29	5	34	0	0	35	0	1
+Patient 3	chr15	80743152	C	G	0	32.8	ARNT2	intronic	NA	24	21	45	0	0	47	0	2
+Patient 3	chr16	72139869	C	G	0	12.3	DHX38	intronic	NA	40	8	48	0	0	49	0	1
+Patient 3	chr17	10426501	G	A	0	15.9	MYH2	coding	nonsynonymous SNV	35	6	41	0	0	41	0	0
+Patient 3	chr17	17897603	C	T	0	20.1	LRRC48	intronic	NA	81	10	91	0	0	91	0	0
+Patient 3	chr17	43318837	C	T	0	11.9	FMNL1	coding	nonsynonymous SNV	110	22	132	0	0	132	0	0
+Patient 3	chr17	7404963	C	G	0	24.4	POLR2A	coding	nonsynonymous SNV	55	9	64	0	0	64	0	0
+Patient 3	chr18	34844630	G	A	0	17.6	CELF4	intronic	NA	103	25	128	0	0	129	1	0
+Patient 3	chr18	63525198	G	C	0	18.7	CDH7	intronic	NA	16	5	21	0	0	21	0	0
+Patient 3	chr19	10401936	C	G	0	10.8	ICAM5	coding	nonsynonymous SNV	36	5	41	0	0	41	0	0
+Patient 3	chr19	38160740	G	C	0	52.9	ZNF781	coding	nonsynonymous SNV	49	19	68	0	0	70	0	2
+Patient 3	chr19	52888028	C	G	0	15	ZNF880	coding	nonsynonymous SNV	25	5	30	0	0	30	0	0
+Patient 3	chr19	52888774	C	G	0	8.1	ZNF880	UTR3	NA	42	5	47	0	0	47	0	0
+Patient 3	chr19	52888833	C	G	0	13.6	ZNF880	UTR3	NA	16	3	19	0	0	19	0	0
+Patient 3	chr19	59073892	G	C	0	13.8	MZF1	coding	synonymous SNV	67	6	73	0	0	75	0	2
+Patient 3	chr20	50235322	G	A	0	49.6	ATP9A	coding	synonymous SNV	81	53	134	0	0	136	1	1
+Patient 3	chr2	109365484	C	G	0.5	13.4	RANBP2	coding	nonsynonymous SNV	83	14	97	24	0	123	0	2
+Patient 3	chr21	47532319	G	A	0	33.1	COL6A2	coding	nonsynonymous SNV	9	5	14	0	0	14	0	0
+Patient 3	chr2	179395821	C	T	0	88.8	TTN	coding	nonsynonymous SNV	37	27	64	0	0	66	0	2
+Patient 3	chr2	196718111	C	T	0	12.4	DNAH7	coding	nonsynonymous SNV	19	4	23	0	0	23	0	0
+Patient 3	chr2	225335303	G	C	0	35.1	CUL3	UTR3	NA	38	22	60	0	0	61	0	1
+Patient 3	chr22	44592020	G	C	0	18.6	PARVG	intronic	NA	69	14	83	0	0	83	0	0
+Patient 3	chr2	51255161	G	A	0	58.2	NRXN1	coding	nonsynonymous SNV	24	26	50	0	0	50	0	0
+Patient 3	chr3	147131274	C	T	0	14.3	ZIC1	coding	nonsynonymous SNV	173	13	186	0	0	190	0	4
+Patient 3	chr4	119202636	C	T	0	42.7	PRSS12	UTR3	NA	42	27	69	0	0	74	0	5
+Patient 3	chr4	119202818	G	C	0	36.8	PRSS12	UTR3	NA	67	33	100	0	0	102	0	2
+Patient 3	chr4	16504129	C	G	0	16.2	LDB2	UTR3	NA	12	3	15	0	0	16	0	1
+Patient 3	chr4	4276301	C	T	0.4	14.6	LYAR	coding	nonsynonymous SNV	105	19	124	0	0	125	0	1
+Patient 3	chr4	68406624	G	T	0	32.4	CENPC1	intronic	NA	15	8	23	0	0	23	0	0
+Patient 3	chr4	86922509	C	G	0	22.8	ARHGAP24	UTR3	NA	81	8	89	0	0	89	0	0
+Patient 3	chr5	80639646	G	C	0	35.6	ACOT12	coding	nonsynonymous SNV	37	13	50	0	0	50	0	0
+Patient 3	chr6	56340979	C	T	0	34.5	DST	coding	nonsynonymous SNV	8	8	16	0	0	16	0	0
+Patient 3	chr7	18684393	C	T	0	44.5	HDAC9	coding	nonsynonymous SNV	18	13	31	0	0	31	0	0
+Patient 3	chr8	110509331	C	G	0.3	36.4	PKHD1L1	intronic	NA	12	6	18	0	0	18	0	0
+Patient 3	chr9	116359099	G	A	0	63.2	RGS3	coding	nonsynonymous SNV	18	14	32	0	0	32	0	0
+Patient 3	chr9	132816237	C	G	0	40.9	GPR107	coding	nonsynonymous SNV	12	11	23	0	0	24	0	1
+Patient 3	chr9	136295179	C	T	0	34	ADAMTS13	coding	synonymous SNV	63	56	119	0	0	119	0	0
+Patient 3	chrX	32563452	C	A	0	17.8	DMD(NM_004006:exon18:c.1993-1G>T,NM_004010:exon18:c.1624-1G>T,NM_000109:exon18:c.1969-1G>T,NM_004007:exon17:c.1624-1G>T,NM_004009:exon18:c.1981-1G>T)	splicing	NA	14	7	21	0	0	21	0	0
+Patient 3	chrX	51638541	C	G	0	18.2	MAGED1	coding	nonsynonymous SNV	28	4	32	0	0	32	0	0
+Patient 3	chrX	70361800	A	G	0	19.1	MED12	coding	nonsynonymous SNV	90	20	110	0	0	110	0	0
+Patient 4	chr10	118897407	G	A	0	15.9	VAX1	coding	nonsynonymous SNV	55	16	71	0	0	72	0	1
+Patient 4	chr10	70856956	A	C	0	23.6	SRGN	coding	nonsynonymous SNV	70	4	74	0	0	74	0	0
+Patient 4	chr11	121421303	G	C	0	37.5	SORL1	coding	nonsynonymous SNV	181	33	214	0	0	215	0	1
+Patient 4	chr11	124824669	C	G	0	23.8	CCDC15	coding	stopgain SNV	23	4	27	0	0	27	0	0
+Patient 4	chr1	145311039	G	C	0	7.3	NBPF10	intronic	NA	198	8	206	14	0	225	0	5
+Patient 4	chr1	147228678	G	A	0	21	GJA5	UTR3	NA	63	19	82	0	0	82	0	0
+Patient 4	chr1	169509969	C	T	0	47.1	F5	coding	synonymous SNV	22	20	42	0	0	43	0	1
+Patient 4	chr11	69625028	C	T	0	38	FGF3	UTR3	NA	24	28	52	0	0	52	0	0
+Patient 4	chr12	108012090	G	A	0	12.3	BTBD11	coding	nonsynonymous SNV	65	9	74	0	0	75	0	1
+Patient 4	chr1	220310230	G	A	0	47.4	IARS2	coding	nonsynonymous SNV	30	16	46	0	0	49	0	3
+Patient 4	chr12	25380271	C	T	0	33.3	KRAS	coding	nonsynonymous SNV	79	10	89	0	0	89	0	0
+Patient 4	chr1	226820906	C	G	0	19.1	ITPKB	UTR3	NA	25	8	33	0	0	33	0	0
+Patient 4	chr12	49726231	G	A	0.2	17.1	C1QL4	UTR3	NA	24	7	31	0	0	31	0	0
+Patient 4	chr12	7244105	G	A	0	17.8	C1R	coding	unknown	40	10	50	0	0	50	0	0
+Patient 4	chr12	95611146	G	A	0.2	32.3	FGD6	UTR5	NA	62	77	139	0	0	141	0	2
+Patient 4	chr12	9994392	C	G	0	33.9	KLRF1	intronic	NA	5	9	14	0	0	14	0	0
+Patient 4	chr1	36748211	C	T	0	36.4	THRAP3	coding	nonsynonymous SNV	57	35	92	0	0	92	0	0
+Patient 4	chr14	23766463	C	T	0	21.9	PPP1R3E	UTR3	NA	86	15	101	0	0	101	0	0
+Patient 4	chr14	94693895	C	T	0	58	PPP4R4	UTR3	NA	37	29	66	0	0	66	0	0
+Patient 4	chr14	94844148	G	A	0	37.1	SERPINA1	UTR3	NA	7	9	16	0	0	16	0	0
+Patient 4	chr15	42519890	A	T	0	38.7	TMEM87A	intronic	NA	8	12	20	0	0	20	0	0
+Patient 4	chr15	69097754	A	C	0.6	18.2	ANP32A-IT1	ncRNA	NA	16	5	21	0	0	21	0	0
+Patient 4	chr1	65895613	G	C	0	50.7	LEPROT	coding	nonsynonymous SNV	54	32	86	0	0	87	1	0
+Patient 4	chr16	66997226	C	T	0	18.8	CES3	coding	nonsynonymous SNV	131	28	159	0	0	160	0	1
+Patient 4	chr16	70405316	C	T	0	26.7	DDX19A	coding	nonsynonymous SNV	37	31	68	171	0	241	0	2
+Patient 4	chr17	16373798	G	C	0	47.8	C17orf76-AS1	ncRNA	NA	6	8	14	0	0	14	0	0
+Patient 4	chr18	61387186	C	G	0	22.1	SERPINB11	intronic	NA	12	5	17	0	0	18	0	1
+Patient 4	chr19	19460235	G	A	0.5	21.2	MAU2	coding	nonsynonymous SNV	22	6	28	0	0	28	0	0
+Patient 4	chr19	33355168	G	A	0	43.7	SLC7A9	coding	synonymous SNV	53	35	88	0	0	90	0	2
+Patient 4	chr19	37441420	C	T	0	55.3	ZNF568	coding	synonymous SNV	27	28	55	0	0	55	0	0
+Patient 4	chr19	41829906	C	G	0	17.9	CCDC97	UTR3	NA	106	20	126	0	0	128	0	2
+Patient 4	chr19	50463367	C	T	0	24.2	SIGLEC11	intronic	NA	36	12	48	22	0	70	0	0
+Patient 4	chr19	53996160	C	G	0	18.6	ZNF813	UTR3	NA	53	11	64	1	0	66	0	1
+Patient 4	chr20	51870362	T	C	0	16.5	TSHZ2	coding	nonsynonymous SNV	44	8	52	0	0	52	0	0
+Patient 4	chr20	9538191	G	T	0.1	44.5	PAK7	intronic	NA	10	10	20	0	0	20	0	0
+Patient 4	chr2	102957183	G	C	0	35.7	IL1RL1	coding	nonsynonymous SNV	27	22	49	0	0	49	0	0
+Patient 4	chr2	155265629	G	A	0	46.7	GALNT13	intronic	NA	13	13	26	0	0	26	0	0
+Patient 4	chr2	165542537	G	C	0	52.2	COBLL1	coding	synonymous SNV	4	3	7	0	0	7	0	0
+Patient 4	chr2	183707161	C	G	0	66.1	FRZB	intronic	NA	20	30	50	0	0	51	0	1
+Patient 4	chr2	189928805	G	A	0	19.5	COL5A2	intronic	NA	45	8	53	0	0	53	0	0
+Patient 4	chr2	192711647	C	G	0	24.4	SDPR	coding	nonsynonymous SNV	60	11	71	0	0	72	0	1
+Patient 4	chr22	20077804	C	T	0	53.2	DGCR8	intronic	NA	6	6	12	0	0	12	0	0
+Patient 4	chr22	22274818	G	A	0.2	16.5	PPM1F	UTR3	NA	71	7	78	0	0	80	0	2
+Patient 4	chr22	31372235	G	C	0	51.9	TUG1	ncRNA	NA	27	20	47	0	0	47	0	0
+Patient 4	chr22	38039757	G	A	0.2	21.7	SH3BP1	coding	nonsynonymous SNV	128	31	159	0	0	159	0	0
+Patient 4	chr2	239157835	C	T	0	53.2	PER2	coding	synonymous SNV	14	6	20	0	0	21	0	1
+Patient 4	chr2	240984701	C	T	0	45.8	OR6B3	coding	synonymous SNV	26	27	53	0	0	54	0	1
+Patient 4	chr3	148925191	C	G	0	41.4	CP	coding	nonsynonymous SNV	27	12	39	0	0	39	0	0
+Patient 4	chr4	100356492	G	C	0	39.7	ADH7	UTR5	NA	41	31	72	0	0	72	0	0
+Patient 4	chr4	103595114	G	T	0	16.1	MANBA	coding	synonymous SNV	63	13	76	0	0	76	0	0
+Patient 4	chr4	15009032	G	C	0	33.7	CPEB2	coding	nonsynonymous SNV	21	25	46	0	0	46	0	0
+Patient 4	chr4	187539231	C	T	0	56.4	FAT1	coding	nonsynonymous SNV	14	14	28	0	0	28	0	0
+Patient 4	chr5	115779840	G	C	0.3	48.8	SEMA6A	UTR3	NA	40	36	76	0	0	76	0	0
+Patient 4	chr5	138652790	G	C	0	46.6	MATR3	coding	nonsynonymous SNV	29	21	50	0	0	50	0	0
+Patient 4	chr5	57754826	G	A	0	42.2	PLK2	coding	nonsynonymous SNV	20	8	28	0	0	28	0	0
+Patient 4	chr5	63509862	G	T	0	19.5	RNF180	coding	stopgain SNV	19	5	24	0	0	25	0	1
+Patient 4	chr6	166402318	G	T	0	50.4	LINC00602	ncRNA	NA	54	38	92	0	0	93	0	1
+Patient 4	chr6	26414737	G	C	0	44.6	BTN3A1	UTR3	NA	31	20	51	0	0	51	0	0
+Patient 4	chr6	56330914	G	A	0	52.4	DST	coding	nonsynonymous SNV	22	20	42	0	0	42	0	0
+Patient 4	chr7	101840186	G	T	0	41.4	CUX1	coding	stopgain SNV	17	7	24	0	0	24	0	0
+Patient 4	chr7	105917753	T	C	0	20.6	NAMPT	intronic	NA	24	8	32	0	0	33	0	1
+Patient 4	chr7	12423171	C	T	0	51.9	VWDE	coding	nonsynonymous SNV	40	28	68	0	0	69	1	0
+Patient 4	chr7	156743058	G	C	0	19.8	NOM1	coding	synonymous SNV	142	30	172	0	0	172	0	0
+Patient 4	chr7	22158641	T	G	0	17.4	RAPGEF5	UTR3	NA	91	12	103	0	0	103	0	0
+Patient 4	chr8	110131365	C	T	0	20	TRHR	coding	nonsynonymous SNV	17	7	24	0	0	24	0	0
+Patient 4	chr8	25177181	G	A	0	44.4	DOCK5	coding	nonsynonymous SNV	20	22	42	0	0	42	0	0
+Patient 4	chr8	25220601	G	A	0	20	DOCK5	coding	synonymous SNV	72	12	84	0	0	84	0	0
+Patient 4	chr8	42162708	C	G	0	53.5	IKBKB	coding	nonsynonymous SNV	35	40	75	0	0	76	0	1
+Patient 4	chr9	117168827	G	A	0	32.2	DFNB31	coding	nonsynonymous SNV	33	14	47	0	0	47	0	0
+Patient 4	chrX	152938168	C	T	0	11.4	PNCK	intronic	NA	39	8	47	0	0	47	0	0
+Patient 4	chrX	17753237	C	T	0	53.7	NHS	UTR3	NA	19	18	37	0	0	38	0	1
+Patient 4	chrX	34962680	G	A	0	19.5	FAM47B	coding	nonsynonymous SNV	80	22	102	0	0	103	0	1
+Patient 4	chrX	47431280	C	T	0	44.2	ARAF	UTR3	NA	18	14	32	0	0	33	0	1
+Patient 4	chrX	47444796	G	A	0	17.3	SYN1,TIMP1	intronic	NA	12	6	18	0	0	18	0	0
+Patient 4	chrX	73048617	C	G	0	19.9	TSIX	ncRNA	NA	26	3	29	0	0	30	0	1
+Patient 4	chrX	79277752	C	G	0	23.6	TBX22	UTR5	NA	32	11	43	0	0	43	0	0
+Patient 4	chrX	79932704	C	T	0	14	BRWD3	coding	nonsynonymous SNV	12	3	15	0	0	15	0	0
+Patient 4	chrX	84342711	G	A	0	14	APOOL	UTR3	NA	43	11	54	0	0	54	0	0
+Patient 5	chr10	102684103	G	C	0	21.1	FAM178A	coding	nonsynonymous SNV	44	10	54	0	0	55	0	1
+Patient 5	chr10	102684166	G	C	0	21.6	FAM178A	coding	nonsynonymous SNV	27	5	32	0	0	32	0	0
+Patient 5	chr10	129172368	G	C	0	31.6	DOCK1	coding	nonsynonymous SNV	58	17	75	0	0	75	0	0
+Patient 5	chr10	29759975	G	A	0	64.2	SVIL	intronic	NA	31	24	55	0	0	55	0	0
+Patient 5	chr10	32582648	C	G	0	46.3	EPC1	coding	nonsynonymous SNV	16	19	35	0	0	35	0	0
+Patient 5	chr10	42832845	G	C	0	19.6	LOC441666	ncRNA	NA	26	5	31	0	0	31	0	0
+Patient 5	chr10	46998866	C	G	0	9.7	GPRIN2	intronic	NA	46	7	53	0	0	53	0	0
+Patient 5	chr10	73466649	C	T	0.4	9.7	CDH23	intronic	NA	15	9	24	0	0	24	0	0
+Patient 5	chr1	109242315	G	C	0	44.4	PRPF38B	coding	nonsynonymous SNV	53	16	69	0	0	72	0	3
+Patient 5	chr1	111825939	G	A	0	26.5	CHIAP2	ncRNA	NA	30	11	41	0	0	41	0	0
+Patient 5	chr1	1385202	C	T	0	46.4	ATAD3C	UTR5	NA	26	19	45	0	0	45	0	0
+Patient 5	chr11	46665802	C	A	0	50.4	ATG13	intronic	NA	25	26	51	0	0	51	0	0
+Patient 5	chr1	154128087	C	G	0	49.6	TPM3	UTR3	NA	48	25	73	0	0	73	0	0
+Patient 5	chr1	155158757	G	A	0	39.5	MUC1	intronic	NA	7	13	20	0	0	20	0	0
+Patient 5	chr11	62446434	G	C	0	49.8	UBXN1	UTR5	NA	38	37	75	0	0	76	0	1
+Patient 5	chr11	62751214	C	T	0	25.9	SLC22A6	intronic	NA	22	10	32	0	0	32	0	0
+Patient 5	chr11	71260053	C	G	0	23.5	KRTAP5-9	coding	nonsynonymous SNV	280	71	351	0	0	353	0	2
+Patient 5	chr1	172434428	C	A	0	80	C1orf105	intronic	NA	27	19	46	0	0	47	0	1
+Patient 5	chr11	8716991	C	T	0	45.8	ST5	intronic	NA	36	18	54	0	0	54	0	0
+Patient 5	chr1	200957405	G	C	0	30.5	KIF21B	intronic	NA	54	18	72	0	0	72	0	0
+Patient 5	chr1	201122915	G	C	0	47.6	TMEM9	intronic	NA	11	8	19	0	0	19	0	0
+Patient 5	chr1	201122919	C	A	0	44.5	TMEM9	intronic	NA	12	8	20	0	0	20	0	0
+Patient 5	chr12	104476614	G	A	0	26.2	HCFC2	coding	nonsynonymous SNV	27	7	34	0	0	35	1	0
+Patient 5	chr12	12870485	C	G	0	82.9	CDKN1B	UTR5	NA	10	34	44	0	0	45	0	1
+Patient 5	chr12	25398262	C	G	0	28.6	KRAS	coding	nonsynonymous SNV	74	16	90	0	0	90	0	0
+Patient 5	chr12	49397029	C	G	0	46.8	PRKAG1	coding	synonymous SNV	24	26	50	0	0	50	0	0
+Patient 5	chr12	51451952	C	T	0	25.3	LETMD1	intronic	NA	13	11	24	0	0	24	0	0
+Patient 5	chr12	54105467	C	T	0	24.6	CALCOCO1	UTR3	NA	47	16	63	0	0	63	0	0
+Patient 5	chr12	6672568	C	G	0	80	NOP2	coding	synonymous SNV	18	6	24	0	0	24	0	0
+Patient 5	chr13	103398729	C	A	0	43.4	CCDC168	coding	nonsynonymous SNV	11	12	23	0	0	23	0	0
+Patient 5	chr1	41949800	G	A	0	18.5	EDN2	coding	nonsynonymous SNV	180	37	217	0	0	218	0	1
+Patient 5	chr14	39652370	G	C	0	24.5	PNN	UTR3	NA	30	5	35	0	0	35	0	0
+Patient 5	chr1	47610264	G	A	0.8	21.7	CYP4A22	coding	nonsynonymous SNV	40	20	60	40	0	100	0	0
+Patient 5	chr15	40914481	C	G	0	21.6	CASC5	coding	synonymous SNV	33	9	42	0	0	43	0	1
+Patient 5	chr15	72252382	C	G	0	31.6	MYO9A	coding	nonsynonymous SNV	39	8	47	0	0	48	0	1
+Patient 5	chr15	74907550	C	G	0	54.8	CLK3	UTR5	NA	10	14	24	0	0	25	0	1
+Patient 5	chr16	12010187	G	A	0	45.5	GSPT1	UTR5	NA	20	17	37	0	0	37	0	0
+Patient 5	chr16	1574070	C	G	0	39.5	IFT140	intronic	NA	9	9	18	0	0	18	0	0
+Patient 5	chr16	67331522	G	C	0	27.8	KCTD19	coding	nonsynonymous SNV	46	5	51	0	0	51	0	0
+Patient 5	chr16	69776271	G	C	0	62.5	NOB1	coding	synonymous SNV	65	14	79	3	0	84	0	2
+Patient 5	chr16	84271014	G	C	0	43.1	KCNG4	coding	synonymous SNV	61	46	107	0	0	108	0	1
+Patient 5	chr17	21144309	G	C	0	52.9	C17orf103	UTR3	NA	89	38	127	0	0	127	0	0
+Patient 5	chr17	37595423	C	G	0	33.4	MED1	coding	nonsynonymous SNV	39	10	49	0	0	49	0	0
+Patient 5	chr17	39534435	G	A	0	44.7	KRT34	intronic	NA	4	10	14	0	0	14	0	0
+Patient 5	chr17	56405278	C	G	0	20.6	BZRAP1	coding	nonsynonymous SNV	67	9	76	0	0	77	1	0
+Patient 5	chr18	31326898	G	A	0.4	50	ASXL3	UTR3	NA	31	17	48	0	0	48	0	0
+Patient 5	chr18	52551627	C	T	0	20.8	RAB27B	coding	synonymous SNV	34	6	40	0	0	40	0	0
+Patient 5	chr18	67266728	G	A	0	34.4	DOK6	coding	nonsynonymous SNV	28	7	35	0	0	35	0	0
+Patient 5	chr18	8247957	C	G	0.2	87.1	PTPRM	intronic	NA	20	11	31	0	0	31	0	0
+Patient 5	chr19	12875663	C	G	0	33.3	HOOK2	coding	nonsynonymous SNV	96	21	117	0	0	118	0	1
+Patient 5	chr19	19380865	G	C	0	44.7	TM6SF2	intronic	NA	11	11	22	0	0	22	0	0
+Patient 5	chr19	2229943	C	T	0	44.5	DOT1L	UTR3	NA	93	75	168	0	0	169	0	1
+Patient 5	chr19	42125490	G	C	0	55.1	CEACAM4	UTR3	NA	61	54	115	0	0	115	0	0
+Patient 5	chr19	4891079	C	T	0	38.9	ARRDC5	coding	synonymous SNV	37	26	63	0	0	63	0	0
+Patient 5	chr19	9938679	G	C	0	45.6	UBL5	UTR5	NA	68	53	121	0	0	121	0	0
+Patient 5	chr20	2815965	C	T	0	100	PCED1A	UTR3	NA	19	35	54	0	0	54	0	0
+Patient 5	chr20	43851636	C	G	0	37.6	SEMG2	coding	nonsynonymous SNV	71	33	104	0	0	106	0	2
+Patient 5	chr21	34537904	G	A	0	45	C21orf54	ncRNA	NA	37	7	44	0	0	44	0	0
+Patient 5	chr2	176959649	G	C	0	16.5	HOXD13	UTR3	NA	55	10	65	0	0	65	0	0
+Patient 5	chr2	217538046	C	T	0	65.8	IGFBP5	UTR3	NA	9	8	17	0	0	18	0	1
+Patient 5	chr2	231973622	G	A	0	47.3	HTR2B	coding	nonsynonymous SNV	45	11	56	0	0	57	0	1
+Patient 5	chr2	31428235	G	A	0	3.2	CAPN14	coding	stopgain SNV	105	6	111	0	0	111	0	0
+Patient 5	chr2	36970330	C	G	0	100	VIT	coding	nonsynonymous SNV	18	13	31	0	0	32	0	1
+Patient 5	chr2	37280751	C	G	0	61	HEATR5B(NM_019024:exon18:c.2400-1G>C)	splicing	NA	19	19	38	0	0	38	0	0
+Patient 5	chr3	14555255	C	G	0	25.2	GRIP2	coding	unknown	144	35	179	0	0	180	0	1
+Patient 5	chr3	159997088	C	G	0	54.4	IFT80	coding	nonsynonymous SNV	26	24	50	0	0	50	0	0
+Patient 5	chr3	160960378	G	C	0	19	NMD3	coding	synonymous SNV	17	5	22	0	0	23	0	1
+Patient 5	chr3	32524409	C	G	0	19.2	CMTM6	UTR3	NA	62	13	75	0	0	78	0	3
+Patient 5	chr3	33909372	G	A	0	20.3	PDCD6IP	UTR3	NA	43	13	56	0	0	58	0	2
+Patient 5	chr3	63600950	T	A	0	34.8	SYNPR	coding	synonymous SNV	15	16	31	0	0	32	0	1
+Patient 5	chr4	10079445	C	T	0	34.6	WDR1	coding	nonsynonymous SNV	43	30	73	0	0	73	0	0
+Patient 5	chr4	13543857	G	C	0	32.9	NKX3-2	coding	nonsynonymous SNV	30	32	62	0	0	62	0	0
+Patient 5	chr4	148463710	G	C	0	20.1	EDNRA	coding	nonsynonymous SNV	85	21	106	0	0	106	0	0
+Patient 5	chr4	153832356	G	C	0	33	ARFIP1	UTR3	NA	60	14	74	0	0	75	0	1
+Patient 5	chr4	39876010	G	C	0.5	17.9	PDS5A	coding	nonsynonymous SNV	31	8	39	0	0	39	0	0
+Patient 5	chr4	8201040	G	T	0	22.9	SH3TC1	upstream	NA	35	8	43	0	0	43	0	0
+Patient 5	chr5	140778592	C	G	0.3	43.8	PCDHGB5	coding	nonsynonymous SNV	34	30	64	0	0	65	1	0
+Patient 5	chr5	173491232	C	G	0	55.6	HMP19	intronic	NA	23	19	42	0	0	43	0	1
+Patient 5	chr5	40761037	G	C	0	49.5	PRKAA1	UTR3	NA	16	15	31	0	0	33	0	2
+Patient 5	chr5	50118245	C	T	0	37.6	PARP8	intronic	NA	37	35	72	0	0	72	0	0
+Patient 5	chr5	9040623	C	G	0	22.9	SEMA5A	UTR3	NA	19	6	25	0	0	25	0	0
+Patient 5	chr6	119215384	G	C	0	52.9	ASF1A	UTR5	NA	13	11	24	0	0	24	0	0
+Patient 5	chr6	131958569	G	C	0	28.6	ENPP3	coding	nonsynonymous SNV	25	21	46	0	0	46	0	0
+Patient 5	chr6	27791875	G	C	0	33.3	HIST1H4J	upstream	NA	81	17	98	16	0	114	0	0
+Patient 5	chr6	33766888	C	G	0	43.1	MLN	coding	nonsynonymous SNV	29	32	61	0	0	62	0	1
+Patient 5	chr7	128032619	C	T	0	44.6	IMPDH1	UTR3	NA	24	26	50	0	0	50	0	0
+Patient 5	chr7	129044925	C	A	0	23.2	AHCYL2	intronic	NA	25	6	31	0	0	31	0	0
+Patient 5	chr7	138591720	C	G	0	35.6	KIAA1549	coding	nonsynonymous SNV	39	32	71	0	0	72	0	1
+Patient 5	chr7	14186477	T	C	0.5	46.3	DGKB	UTR3	NA	16	13	29	0	0	29	0	0
+Patient 5	chr7	57530588	G	C	0	23.9	ZNF716	UTR3	NA	89	30	119	0	0	119	0	0
+Patient 5	chr8	126023790	G	C	0	23.8	SQLE	coding	nonsynonymous SNV	33	7	40	0	0	40	0	0
+Patient 5	chr8	73993289	G	C	0	41.4	SBSPON	coding	nonsynonymous SNV	30	24	54	0	0	54	0	0
+Patient 5	chr9	130478320	G	C	0	26	PTRH1,TTC16	upstream	NA	38	15	53	0	0	53	0	0
+Patient 5	chr9	130478402	G	T	0	33.6	TTC16	UTR5	NA	114	40	154	0	0	155	0	1
+Patient 5	chr9	139923258	C	T	0	47.8	ABCA2	coding	nonsynonymous SNV	8	8	16	0	0	16	0	0
+Patient 5	chr9	92220406	G	A	0	24.6	GADD45G	coding	nonsynonymous SNV	106	29	135	0	0	138	1	2
+Patient 5	chrX	101858342	G	A	0	16.7	ARMCX5	coding	nonsynonymous SNV	83	15	98	0	0	99	0	1
+Patient 5	chrX	117762180	C	T	0	39	DOCK11	coding	nonsynonymous SNV	35	29	64	16	0	81	0	1
+Patient 5	chrX	125298988	C	T	0	37.3	DCAF12L2	coding	nonsynonymous SNV	17	21	38	0	0	38	0	0
+Patient 5	chrX	140967001	C	T	0	18.9	MAGEC3	coding	nonsynonymous SNV	35	5	40	0	0	40	0	0
+Patient 5	chrX	48121296	C	T	0	21.6	SSX1	intronic	NA	27	17	44	0	0	44	0	0
+Patient 5	chrX	48457897	G	A	0	16.4	WDR13	intronic	NA	41	12	53	0	0	53	0	0
+Patient 5	chrX	48661282	G	A	0	25	HDAC6	coding	nonsynonymous SNV	40	12	52	0	0	53	0	1
+Patient 5	chrX	49054137	C	T	0	26.1	SYP	intronic	NA	28	10	38	0	0	38	0	0
+Patient 5	chrX	69506997	G	C	0	44.2	PDZD11	intronic	NA	16	7	23	0	0	23	0	0
+Patient 6	chr1	16111478	C	T	0	48.6	FBLIM1	UTR3	NA	74	53	127	0	0	127	0	0
+Patient 6	chr11	6655412	G	C	0.4	45.6	DCHS1	coding	synonymous SNV	57	49	106	0	0	106	0	0
+Patient 6	chr1	75038386	G	C	0.3	45.9	C1orf173	coding	nonsynonymous SNV	18	6	24	0	0	25	0	1
+Patient 6	chr17	56164528	C	T	0	44.7	DYNLL2	coding	nonsynonymous SNV	50	50	100	0	0	101	0	1
+Patient 6	chr19	45322937	C	T	0	47.1	BCAM	coding	nonsynonymous SNV	73	82	155	0	0	156	0	1
+Patient 6	chr22	24582021	C	T	0	45.1	SUSD2	coding	synonymous SNV	88	63	151	0	0	151	0	0
+Patient 6	chr3	100526981	C	T	0	44.2	ABI3BP	intronic	NA	10	12	22	0	0	22	0	0
+Patient 6	chr8	144920910	C	T	0.3	46.3	NRBP2	coding	nonsynonymous SNV	109	91	200	0	0	202	1	1
+Patient 6	chr8	144998984	C	T	0	42.4	PLEC	coding	nonsynonymous SNV	40	33	73	0	0	77	2	2
+Patient 6	chrX	20060690	C	T	0.2	46.9	MAP7D2	coding	nonsynonymous SNV	63	45	108	0	0	108	0	0

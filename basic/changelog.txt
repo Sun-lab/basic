@@ -1,0 +1,7 @@
+Wei Sun
+2017-10-20
+
+=====================
+0.99.002
+=====================
+remove function related with one-inflated mixture beta-binomial

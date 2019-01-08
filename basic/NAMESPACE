@@ -1,0 +1,15 @@
+useDynLib(basic)
+
+import(MASS)
+import(VGAM)
+importFrom("graphics", "legend", "lines")
+importFrom("stats", "as.dist", "cutree", "dbinom", "density", "dist",
+           "hclust", "optimize", "quantile")
+
+exportPattern("^[[:alpha:]]+")
+
+# ------------------------------------------
+# S3method declarations.  
+# ------------------------------------------
+
+S3method(print, bb.mix)
