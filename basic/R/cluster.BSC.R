@@ -4,7 +4,7 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
          straify.by.maf=TRUE, stratify.n.intervals=20, stratify.window=2,  
          epsilon=0.001, alpha1=0.02, beta1=0.8, alpha2=0.05, beta2=0.6, 
          theta = c(0.01, 0.01, 0.5, 0.1,0.99, 0.01, 0.3, 0.4), 
-         maxIt=1000, converged=1e-5){
+         maxIt=1000, converged=1e-5, verbose=1){
   
   # ---------------------------------------------------------
   # check whether b.cn is a valid vector
@@ -46,8 +46,8 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
   
   umuts = unique(c(mutations))
   
-  if(! setequal(umuts, c(NA, 0, 1))){
-    stop("mutations must take three values 0, 1, or NA")
+  if(any (! umuts %in% c(NA, 0, 1))){
+    stop("mutations must values 0, 1, or NA")
   }
   
   if(! all(dim(mutations) == dim(asrec)) ){
@@ -104,7 +104,9 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
   # missing genotype calls
   # -----------------------------------------------------------------
   
-  message(sprintf("initialize mutation calls in single cells\n"))
+  if(verbose > 0){
+    message(sprintf("initialize mutation calls in single cells\n"))
+  }
   
   mafs = (b.asrec/b.trec)*(b.cn/2)
   
@@ -126,10 +128,14 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     thetas = matrix(NA, nrow=stratify.n.intervals-stratify.window+1, ncol=8)
     fits = list()
     
-    message(sprintf("fit mixture of beta-binomials, stratified by maf\n"))
+    if(verbose > 1){
+      message(sprintf("fit mixture of beta-binomials, stratified by maf\n"))
+    }
     
     for(j in 1:nrow(thetas)){
-      message(".", appendLF=FALSE)
+      if(verbose > 1){
+        message(".", appendLF=FALSE)
+      }
       
       wwj  = which(mafs > qs[j] & mafs <= qs[j+stratify.window])
       
@@ -140,12 +146,22 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
       # use all the data to estimate mixture components, and then
       # use data with missing mutation to esimate mixture proportions
       fit1 = bb.mix3(asrec.j, trec.j, theta)
-      fit2 = bb.mix3(asrec.j[is.na.j], trec.j[is.na.j], fit1$theta, reEst=1)
       
-      thetas[j,] = fit2$theta
-      fits[[j]]  = fit2
+      if(length(is.na.j) > 0){
+        fit2 = bb.mix3(asrec.j[is.na.j], trec.j[is.na.j], fit1$theta, reEst=1)
+        thetas[j,] = fit2$theta
+        fits[[j]]  = fit2
+      }else{
+        thetas[j,] = fit1$theta
+        fits[[j]]  = fit1
+      }
+      
     }
-    message("")
+    
+    if(verbose > 0){
+      message("")
+    }
+    
     colnames(thetas) = names(fit1$theta)
     thetas
     
@@ -155,23 +171,13 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     is.NAs = which(c(is.na(mutations)))
     
     fit0a = bb.mix3(nA, nTotal, theta)
-    fit0b = bb.mix3(nA[is.NAs], nTotal[is.NAs], fit0a$theta, reEst=1)
+    if(length(is.NAs) > 0){
+      fit0b = bb.mix3(nA[is.NAs], nTotal[is.NAs], fit0a$theta, reEst=1)
+    }else{
+      fit0b = fit0a
+    }
     
   }
-
-#   fit0b$theta
-#   
-#   par(mfrow=c(3,3), mar=c(2,4,1,1))
-#   bb.mix3.plot(fit0b)
-#   for(k in 1:8){
-#     bb.mix3.plot(fits[[k]])
-#   }
-#   
-#   par(mfrow=c(4,2), mar=c(2,4,1,1))
-#   for(k in 1:8){
-#     plot(thetas[,k], type="b", ylab=colnames(thetas)[k], ylim=c(0,1))
-#     abline(h=fit0b$theta[k])
-#   }
 
   # ---------------------------------------------------------
   # impute somatic mutation calls
@@ -270,9 +276,10 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
   alpha.betas = c(alpha1, beta1, alpha2, beta2)
 
   for(nclust in nclusters){
+    if(verbose > 0){
+      message(sprintf("nclust = %d, time: %s\n", nclust, date()))
+    }
     
-    message(sprintf("nclust = %d, time: %s\n", nclust, date()))
-
     Ehats = Ds
     c12   = cutree(h12, k=nclust)
     
@@ -289,7 +296,7 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     rownames(gammas) = colnames(mutations)
     
     for(j in 1:nclust){
-      gammas[,j] = colMeans(Ehats[which(c12==j),])
+      gammas[,j] = colMeans(Ehats[which(c12==j),,drop=FALSE])
     }
     gammas[which(gammas > 1-epsilon)] = 1 - epsilon
     gammas[which(gammas < epsilon)]   = epsilon
@@ -336,7 +343,7 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
       #     print(theta)
       #     cat("\n")
       
-      if(it %% 100 == 0){
+      if(verbose > 1 && it %% 100 == 0){
         message(sprintf("iteration %s, time: %s\n", it, date()))
       }
       
@@ -395,11 +402,13 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
       alpha1  = sum(D.obs*(1 - E.obs))/sum(1-E.obs)
       beta1   = sum(D.obs*E.obs)/sum(E.obs)
       
-      D.miss = c(Ds[which(is.na(mutations))])
-      E.miss = c(Ehats[which(is.na(mutations))])
-      
-      alpha2  = sum(D.miss*(1 - E.miss))/sum(1-E.miss)
-      beta2   = sum(D.miss*E.miss)/sum(E.miss)
+      if(length(which(is.na(mutations))) > 0){
+        D.miss = c(Ds[which(is.na(mutations))])
+        E.miss = c(Ehats[which(is.na(mutations))])
+        
+        alpha2  = sum(D.miss*(1 - E.miss))/sum(1-E.miss)
+        beta2   = sum(D.miss*E.miss)/sum(E.miss)
+      }
       
       # restimate gammas
       for(j in 1:nclust){
@@ -469,8 +478,15 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     logLikE
     logLikDR
     
+    names(logLikB) = NULL
+    names(logLikE) = NULL
+    names(logLikDR) = NULL
+    
     logL = logLikB + logLikE + logLikDR
+    
     # df = (nclust*mm) [for gamma] + nclust-1 [for nu] + nclust-1 [for tau]
+    
+    AIC  = -2*logL + 2*(nclust*mm + 2*nclust - 2)
     BIC  = -2*logL + log(nn*(mm+1))*(nclust*mm + 2*nclust - 2)
     
     theta = c(alpha1, beta1, alpha2, beta2, pi1, rho1, pi2, rho2, pi3, rho3, 
@@ -481,8 +497,8 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     
     lab1 = paste0("n", nclust)
     results[[lab1]] = list(E=Ehats, theta=theta, gammas=gammas, taus=taus, 
-                           nu=nu, postPs=postPs, logLik=logL, BIC=BIC,
-                           nIt=it, gap=gap)
+                           nu=nu, postPs=postPs, logLik=logL, AIC=AIC, 
+                           BIC=BIC, nIt=it, gap=gap)
   }
 
   getItem <- function(v, label){
@@ -494,12 +510,13 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     bic
   }
   
+  sAIC = sapply(results,  getItem, label="AIC")
   sBIC = sapply(results,  getItem, label="BIC")
   sIt  = sapply(results,  getItem, label="nIt")
-  sGap = sapply(results,  getItem, label="gap")
 
-  sumClust = data.frame(nclust=nclusters, BIC=sBIC, nIt=sIt, gap=sGap)
+  sumClust = data.frame(nclust=nclusters, AIC=sAIC, BIC=sBIC, nIt=sIt)
   
+  results$nclust.by.AIC = names(results)[which.min(sAIC)]
   results$nclust.by.BIC = names(results)[which.min(sBIC)]
   results$summary.cluster = sumClust
 

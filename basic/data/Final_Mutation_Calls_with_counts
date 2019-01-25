@@ -1,4 +1,4 @@
-Patient	Chromosome	Position	Reference	Variant	Confirmed.Normal.Var.Freq	Confirmed.Tumor.Var.Freq	Gene	Type	Effect	refCount	altCount	totalCount	lowMAPQDepth	lowBaseQDepth	rawDepth	otherBases	improperPairs
+Patient	Chromosome	Position	Reference	Variant	ConfirmedNormalVAF	ConfirmedTumorVAF	Gene	Type	Effect	refCount	altCount	totalCount	lowMAPQDepth	lowBaseQDepth	rawDepth	otherBases	improperPairs
 Patient 1	chr1	151512803	G	A	0	19.7	TUFT1	UTR5	NA	74	13	87	0	0	87	0	0
 Patient 1	chr1	151735456	C	T	0.3	29.4	OAZ3	UTR5	NA	113	39	152	0	0	152	0	0
 Patient 1	chr1	24390601	G	A	0	23.3	MYOM3	coding	stopgain SNV	35	13	48	0	0	48	0	0

@@ -1,0 +1,173 @@
+---
+title: "BaSiC-simulation-comparison"
+author: "Wei Sun"
+date: "1/22/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R markdown file illustrate the usage of R package ```basic``` using simulated data, as described in our paper: Sun et al. (2019) Joint Analysis of Single Cell and Bulk Tissue Sequencing Data to Infer Intra-Tumor Heterogeneity. Here we evalute two alternative methods: B-SCITE and PhyloWGS. 
+
+```{r libraries, warning = FALSE, message = FALSE}
+library(basic)
+library(ggcorrplot)
+library(gridExtra)
+library(knitr)
+```
+
+## B-SCITE
+
+### Prepare input for B-SCITE
+
+We first loaded the simulated data and prepare input for B-SCITE. Because B-SCITE does not take into account of copy number information, we only evaluate it using the data without copy number alterations. The input scDNA-seq data is saved in a text file as a binary matrix with each row being a mutation and each column being a cell.
+
+```{r prepare_sc_data}
+load("basic/data/simulation_SCS_bulk.RData")
+
+mutations = simu.SCS$observed.mutation
+dim(mutations)
+mutations[1:2,1:3]
+table(c(mutations), useNA="ifany")
+
+mutations[which(is.na(mutations))] = 3
+table(c(mutations), useNA="ifany")
+
+write.table(mutations, file = "basic/data/B-SCITE_SCFile_n_1000_m_20.txt", 
+            append = FALSE, quote = FALSE, sep = "\t", 
+            row.names = FALSE, col.names = FALSE)
+```
+
+The input bulk tumor data is saved in a text file with each row being one mutation. 
+
+```{r prepare_bulk_data}
+b.trec  = simu.bulk$trec
+b.asrec = simu.bulk$asrec
+n = length(b.trec)
+
+bulk = data.frame(ID=paste0("mut", 1:n), Chromosome=rep(1,n), Position=1:n)
+bulk$MutantCount = b.asrec
+bulk$ReferenceCount = b.trec - b.asrec
+bulk$INFO = paste0("ID=mut", 1:n, ";")
+
+dim(bulk)
+bulk[1:2,]
+
+write.table(bulk, file = "basic/data/B-SCITE_bulkFile_n_1000.txt", 
+            append = FALSE, quote = FALSE, sep = "\t", 
+            row.names = FALSE, col.names = TRUE)
+```
+
+### Run B-SCITE
+
+We downloaded the B-SCITE package from https://github.com/smalikic/B-SCITE. Then we compiled it following the instruction at https://github.com/smalikic/B-SCITE, and ran the analysis using command ```python run_B-SCITE.py```. We modified the code ```run_B-SCITE.py``` for our anlaysis to update the path for input files. In addition, we changed the line of ```run_command += "-SCFileLocation "   + SCFile   + " "``` to be ```run_command += "-i "   + SCFile   + " "```. This is because in the cpp source code, the single cell data file is provided through ```-i```.  Without this update, we encountered an error message ```unknown parameter -SCFileLocation```. 
+
+
+```{python, eval=FALSE}
+import sys
+import os
+
+APP_PATH  =  "./../src/bscite.exe" # path to B-SCITE executable
+OUTPUT_FOLDER = "./basic_simulation" # this is the prefix used for the three output files (.matrices, .gv and .newick) given as the output of B-SCITE
+
+SCFile   = "./B-SCITE_SCFile_n_1000_m_20.txt" # path input SC File
+bulkFile = "./B-SCITE_bulkFile_n_1000.txt"    # path input bulk file
+fp = 0.00001 # esimated false positive rate of SCS experiment
+fn = 0.15    # estimated false negative rate of SCS experiment
+n  = 50      # number of mutations
+m  = 100     # number of cells
+r  = 1       # number of repeats
+l  = 2000    # number of loops
+
+run_command =""
+run_command += APP_PATH + " "
+run_command += "-i "   + SCFile   + " "
+run_command += "-bulkFileLocation " + bulkFile + " "
+run_command += "-n "  + str(n)  + " "
+run_command += "-m "  + str(m)  + " "
+run_command += "-fd " + str(fp) + " "
+run_command += "-ad " + str(fn) + " "
+run_command += "-r "  + str(r)  + " "
+run_command += "-l "  + str(l)  + " "
+run_command += "-o "  + OUTPUT_FOLDER + " "
+os.system(run_command)
+```
+
+## PhyloWGS
+
+### Prepare input for PhyloWGS
+The most important information of somatic mutations (file ```PhyloWGS_ssm_data.txt```) is saved in columns ```a```` (reference read count) and ```d``` (total read count). ```mu_r``` and ```mu_v``` is the fraction of expected reference allele sampling from the reference population and the fraction of expected reference allele sampling from variant population, respectively. Since there is no copy number, we simply create an empty file for copy number data. 
+```{r prepare_bulk_data_phyloWGS, fig.height=3, fig.width=4}
+bulk2 = data.frame(id=paste0("s", 0:(n-1)), gene=paste0("gene", 0:(n-1)))
+bulk2$a = b.trec-b.asrec
+bulk2$d = b.trec
+bulk2$mu_r = rep(0.999, n)
+bulk2$mu_v = rep(0.499, n)
+
+dim(bulk2)
+bulk2[1:2,]
+
+par(mar=c(5,4,1,1))
+hist(bulk2$a/bulk2$d, xlab="total depth", ylab="reference depth", 
+     breaks=20, main="")
+
+write.table(bulk2, file = "basic/data/PhyloWGS_ssm_data.txt", 
+            append = FALSE, quote = FALSE, sep = "\t", 
+            row.names = FALSE, col.names = TRUE)
+
+if(file.exists("PhyloWGS_cnv_data.txt")){ system("rm PhyloWGS_cnv_data.txt") }
+system("touch PhyloWGS_cnv_data.txt")
+```
+
+### Run PhyloWGS
+
+We used the following shell script to run PhyloWGS. First copy the files ```PhyloWGS_ssm_data.txt``` and ```PhyloWGS_cnv_data.txt``` to a working directory and run the fillowing shell script in the working directory. 
+
+```{bash, eval=FALSE}
+
+#!/bin/sh
+
+echo 'Run PhyloWGS ...'
+
+python ~/research/ITH/_software/phylowgs/multievolve.py \
+--num-chains 4 \
+--ssms PhyloWGS_ssm_data.txt \
+--cnvs PhyloWGS_cnv_data.txt
+
+cd chains
+
+[ ! -d test_results ] && mkdir test_results
+cd test_results
+
+echo 'Summarize PhyloWGS result ...'
+
+python ~/research/ITH/_software/phylowgs/write_results.py \
+--include-ssm-names \
+--min-ssms 2 \
+example_data ../trees.zip \
+example_data.summ.json.gz \
+example_data.muts.json.gz \
+example_data.mutass.zip
+
+cd ..
+cp -r test_results ~/research/ITH/_software/phylowgs/witness/data
+cd ~/research/ITH/_software/phylowgs/witness
+gunzip data/*/*.gz
+python index_data.py
+python -m SimpleHTTPServer
+```
+Then the results can be viewed from http://127.0.0.1:8000 in your browser. Here are a few screenshot of the results. The first plot shows the phylogenetic tree. As expected, PhyloWGS identify three subclones and cannot seperate the two subclones with very similar cellular frequencies. Here simulated subclone 3 and 4 were combined into subclone 3. 
+
+```{r, out.width = "80%", echo=FALSE}
+include_graphics("ex_figures/ex_simu_PhyloWGS_tree.png")
+```
+
+Next plot shows the the number of subclones across all trees sampled by PhyloGWS's MCMC. In most cases, 3 subclones were found.  
+
+```{r, out.width = "70%", echo=FALSE}
+include_graphics("ex_figures/ex_simu_PhyloWGS_n_subclone.png")
+```
+
+

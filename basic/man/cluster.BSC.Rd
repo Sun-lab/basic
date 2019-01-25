@@ -39,7 +39,7 @@ the number of clusers. It could be a vector, e.g., 2:5, and then the results of 
  we fit a mixture of beta-binomial distribution to decribe read counts from single cells. If straify.by.maf=TRUE, we fit stratif somatic mutations based MAF from bulk tumor and fit such mixture distributions for each strata separately.  
 }
   \item{stratify.n.intervals, stratify.window}{
- If straify.by.maf=TRUE, we cover somatic mutations (ordered by their MAF) by sliding windows of size stratify.window*1/stratify.n.intervals, and slide the window by 1/stratify.n.intervals each time. Because these statum have overlaps, one mutations may be used more than once to fit the mixture distribution. After fitting the model aross all stratum, a somatic mutation will use the mixture distirbution fitted by the closest strata. The distance between a somatic mutation and a strata is defined by the distnace between the sotmatic mtuations's MAF and the center of the strata. 
+ If straify.by.maf=TRUE, we cover somatic mutations (ordered by their MAFs) by sliding windows of size stratify.window/stratify.n.intervals, and slide the window by 1/stratify.n.intervals each time. Because these statum have overlaps, one mutation may be used more than once to fit the mixture distribution. After fitting the model aross all stratum, a somatic mutation will use the mixture distirbution fitted by the closest strata. The distance between a somatic mutation and a strata is defined by the distnace between the sotmatic mtuations's MAF and the center of the strata. 
 }
   \item{epsilon}{
 we assume the underlying true mutation status of each locus in a cell follows a Bernoulli distribution. The success probablity of the Bernoulli distriubtion is bounded by [epsilon, 1 - epsilon]. 

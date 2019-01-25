@@ -1,7 +1,7 @@
 ---
 title: "BaSiC"
 author: "Wei Sun"
-date: "1/3/2019"
+date: "1/16/2019"
 output: html_document
 ---
 
@@ -20,7 +20,7 @@ library(gridExtra)
 
 First read in the somatic mutaton calls and read-depth information from bulk tumor and single cells. 
 ```{r load_data}
-load("data/wang_2014.RData")
+load("basic/data/wang_2014.RData")
 ls()
 
 dim(mutations.bulk)
@@ -43,17 +43,16 @@ table(is.na(mutations.sc))/12624
 
 Next we cluster the mutations based on the data from single cells. This involves imputing the missing values in single cell mutation calls. We evaluate the resutls with number of clusters being 2, 3, or 4. In the following resutls, ```scs$n2``` and ```scs$n3``` indicate results for 2 or 3 clusters, respectively.   
 ```{r scs}
-scs = cluster.SCS(mutations.sc, asrec, trec, nclust=2:4)
+scs = cluster.SCS(mutations.sc, asrec, trec, nclust=2:4, verbose=0)
 
 names(scs)
 scs$summary.cluster
-scs$nclust.by.BIC
 
 scs$n2$theta
 scs$n3$theta
 ```
 
-Next we perform joint anlaysis of bulk tumor data and single cell data. 
+The following codes perform joint anlaysis of bulk tumor data and single cell data, while accouting for copy number alterations. 
 
 ```{r basic}
 b.cn    = mutations.bulk$totalCN
@@ -61,28 +60,24 @@ b.asrec = mutations.bulk$t_alt_count
 b.trec  = mutations.bulk$t_alt_count + mutations.bulk$t_ref_count
 
 cBSC = cluster.BSC(b.cn, b.asrec, b.trec, mutations.sc, asrec, trec, 
-                   nclusters=2:4)
+                   nclusters=2:4, verbose=0)
 
 names(cBSC)
 cBSC$summary.cluster
-cBSC$nclust.by.BIC
 ```
 
-Next we perform joint anlaysis of bulk tumor data and single cell data, without accouting for copy number information. To do this, we just set the copy number input to be 2 for all loci. 
+As a comparison, we also perform joint anlaysis of bulk tumor data and single cell data, without accouting for copy number information. To do this, we just set the copy number input to be 2 for all loci. 
 
 ```{r basic2}
 b.cn  = rep(2, length(b.asrec))
 cBSC2 = cluster.BSC(b.cn, b.asrec, b.trec, mutations.sc, asrec, trec, 
-                    nclusters=2:4)
+                    nclusters=2:4, verbose=0)
 
 names(cBSC2)
 cBSC2$summary.cluster
-cBSC2$nclust.by.BIC
 ```
 
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
+The paramters ```nu``` is the proportion of mutations that belong to different clusters. The following plots illustrate the cluster means (```gamma```) estimated by different approaches. 
 ```{r summary, fig.width = 8, fig.height = 2}
 
 scs$n2$nu

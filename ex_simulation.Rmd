@@ -1,0 +1,167 @@
+---
+title: "BaSiC-simulation"
+author: "Wei Sun"
+date: "1/22/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R markdown file illustrate the usage of R package ```basic``` using simulated data, as described in our paper: Sun et al. (2019) Joint Analysis of Single Cell and Bulk Tissue Sequencing Data to Infer Intra-Tumor Heterogeneity. 
+
+```{r libraries, warning = FALSE, message = FALSE}
+library(basic)
+library(ggcorrplot)
+library(gridExtra)
+```
+
+### Analysis without copy number alterations
+
+We first evaluate the simulated data without any copy number alterations. 
+
+```{r analysis}
+load("basic/data/simulation_SCS_bulk.RData")
+
+b.trec    = simu.bulk$trec
+b.asrec   = simu.bulk$asrec
+b.cn      = rep(2, length(b.trec))
+
+mutations = simu.SCS$observed.mutation
+trec      = simu.SCS$trec
+asrec     = simu.SCS$asrec
+
+dim(mutations)
+mutations[1:2,1:3]
+table(is.na(mutations))
+
+cBSC = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters=2:5)
+
+Ds = simu.SCS$observed.mutation
+Es = simu.SCS$true.mutations
+cBSC$summary.cluster
+```
+
+From the summary of above analayis, both AIC and BIC suggest that there are three clusters. Next we visualize the distribution of estimated mutation status (```Ehats```) vs. the true mutation status (```E```). 
+
+```{r plot1, fig.width=6, fig.height=6}
+par(mfrow=c(2,2), mar=c(4,4,2,1))
+hist(c(Ds)[which(c(Es)==0)], main="Ds | Es=0", xlab="", breaks=20)
+hist(c(Ds)[which(c(Es)==1)], main="Ds | Es=1", xlab="", breaks=20)
+hist(c(cBSC$n3$E)[which(c(Es)==0)], main="Ehats | Es=0", xlab="", breaks=20)
+hist(c(cBSC$n3$E)[which(c(Es)==1)], main="Ehats | Es=1", xlab="", breaks=20)
+```
+
+Visualize the whole mutation matrix for observed mutations, true mutations and estimated mutations. 
+```{r plot2, fig.width=9, fig.height=4.5}
+par(mfrow=c(1,3), mar=c(4,4,4,1))
+image(t(Ds), col=c("grey", "darkred"), axes = FALSE, xlab="Cells", 
+      ylab="Mutations", main="observed mutations")
+image(t(Es), col=c("grey", "darkred"), axes = FALSE, xlab="Cells", 
+      ylab="Mutations", main="true mutations")
+image(t(cBSC$n3$E), col=c("grey", "darkred"), axes = FALSE, xlab="Cells", 
+      ylab="Mutations", main="esimated mutations")
+```
+
+### Analysis with copy number alterations
+Next we conduct similar anlaysis using the simulated data with copy number alterations.
+```{r load_data_cna}
+load("basic/data/simulation_SCS_bulk_with_cn.RData")
+
+b.trec    = simu.bulk$trec
+b.asrec   = simu.bulk$asrec
+b.cn      = simu.bulk$cn
+
+mutations = simu.SCS$observed.mutation
+trec      = simu.SCS$trec
+asrec     = simu.SCS$asrec
+
+dim(mutations)
+mutations[1:2,1:3]
+table(c(mutations), useNA="ifany")
+```
+
+Single cell only analysis.
+```{r analysis_cna_sc}
+cd1 = cluster.SCS(mutations, asrec, trec, nclusters=2:5)
+cd1$summary.cluster
+```
+
+Joint analysis of bulk and scDNA-seq with CNA information.
+
+```{r analysis_cna_basic}
+cBSC  = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec, 
+                    nclusters=2:5)
+cBSC$summary.cluster
+
+b.cn  = rep(2, length(b.asrec))
+cBSC2 = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec,
+                    nclusters=2:5)
+cBSC2$summary.cluster
+```
+
+We compare the clustr mean estimations (```gamma```'s) versus the its true values. 
+
+```{r compare_cluster_mean, fig.width=6, fig.height=8}
+gamma.pi = 0.95
+M0 = 20
+
+scGroups = rep(NA, M0)
+scGroups[1:2] = 1
+scGroups[3:4] = 2
+scGroups[5:12] = 3
+scGroups[13:20] = 4
+
+table(scGroups)
+
+gamma = matrix(1-gamma.pi, nrow=4, ncol=M0)
+gamma[1,] = rep(gamma.pi, M0)
+gamma[2,which(scGroups >= 2)] = gamma.pi
+gamma[3,which(scGroups == 3)] = gamma.pi
+gamma[4,which(scGroups == 4)] = gamma.pi
+gamma
+
+g1 = ggcorrplot(t(gamma), tl.cex=10, lab = FALSE, legend.title="") + 
+  ggtitle('True configuration' ) + theme(plot.title = element_text(size = 10))
+
+g2 = ggcorrplot(cd1[["n5"]]$gamma, tl.cex=10, lab=FALSE, legend.title="") + 
+  ggtitle('SCS only' ) + theme(plot.title = element_text(size = 10))
+
+gamma2 = cBSC2[["n4"]]$gamma[,c(1,2,4,3)]
+g3 = ggcorrplot(gamma2, tl.cex=10, lab=FALSE, legend.title="") + 
+  ggtitle('Bulk tumor + SCS, without CNA information' ) + 
+  theme(plot.title = element_text(size = 10))
+
+g4 = ggcorrplot(cBSC[["n4"]]$gamma, tl.cex=10, lab=FALSE, legend.title="") + 
+  ggtitle('Bulk tumor + SCS, with CNA information' ) +
+  theme(plot.title = element_text(size = 10))
+
+grid.arrange(g1, g2, g3, g4, nrow = 4)
+```
+
+Finally we compare the cluster membership of each method versus the true cluster membership. 
+```{r compare_cluster_membership, fig.width=6, fig.height=8}
+round(cBSC2$n4$gammas,2)
+
+mut1 = c(rep(1,600), rep(2,200), rep(3,100), rep(4,100))
+mut2 = apply(cd1$n5$postPs, 1, which.max)
+mut3 = apply(cBSC2$n4$postPs[,c(1,2,4,3)], 1, which.max)
+mut4 = apply(cBSC$n4$postPs, 1, which.max)
+
+t2 = table(mut1, mut2)
+t3 = table(mut1, mut3)
+t4 = table(mut1, mut4)
+ts = cbind(t2, t3, t4)
+ts
+
+match0 = (mut1==1 & mut2==2) | (mut1==3 & mut2==5) | (mut1==4 & mut2==4)
+table(match0)/length(mut1)
+table(mut1 == mut3)/length(mut1)
+table(mut1 == mut4)/length(mut1)
+```
+
+
+```{r}
+sessionInfo()
+```
