@@ -11,6 +11,7 @@
 
 <meta name="author" content="Wei Sun" />
 
+<meta name="date" content="2019-02-06" />
 
 <title>BaSiC-simulation</title>
 
@@ -123,7 +124,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">BaSiC-simulation</h1>
 <h4 class="author"><em>Wei Sun</em></h4>
-<h4 class="date"><em>1/22/2019</em></h4>
+<h4 class="date"><em>2019-02-06</em></h4>
 
 </div>
 
@@ -158,10 +159,10 @@ dim(mutations)</code></pre>
 <pre class="r"><code>cBSC = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters=2:5)</code></pre>
 <pre><code>## initialize mutation calls in single cells</code></pre>
 <pre><code>## </code></pre>
-<pre><code>## nclust = 2, time: Wed Jan 23 21:36:15 2019</code></pre>
-<pre><code>## nclust = 3, time: Wed Jan 23 21:37:43 2019</code></pre>
-<pre><code>## nclust = 4, time: Wed Jan 23 21:39:02 2019</code></pre>
-<pre><code>## nclust = 5, time: Wed Jan 23 21:40:47 2019</code></pre>
+<pre><code>## nclust = 2, time: Wed Feb  6 15:26:22 2019</code></pre>
+<pre><code>## nclust = 3, time: Wed Feb  6 15:28:06 2019</code></pre>
+<pre><code>## nclust = 4, time: Wed Feb  6 15:29:37 2019</code></pre>
+<pre><code>## nclust = 5, time: Wed Feb  6 15:31:39 2019</code></pre>
 <pre class="r"><code>Ds = simu.SCS$observed.mutation
 Es = simu.SCS$true.mutations
 cBSC$summary.cluster</code></pre>
@@ -170,7 +171,7 @@ cBSC$summary.cluster</code></pre>
 ## n3      3 51315.18 51824.13  809
 ## n4      4 54204.98 54888.88 1000
 ## n5      5 54257.58 55116.42 1000</code></pre>
-<p>From the summary of above analayis, both AIC and BIC suggest that there are three clusters. Next we visualize the distribution of estimated mutation status (<code>Ehats</code>) vs. the true mutation status (<code>E</code>).</p>
+<p>From the summary of above analysis, both AIC and BIC suggest that there are three clusters. Next we visualize the distribution of estimated mutation status (<code>Ehats</code>) vs. the true mutation status (<code>E</code>).</p>
 <pre class="r"><code>par(mfrow=c(2,2), mar=c(4,4,2,1))
 hist(c(Ds)[which(c(Es)==0)], main=&quot;Ds | Es=0&quot;, xlab=&quot;&quot;, breaks=20)
 hist(c(Ds)[which(c(Es)==1)], main=&quot;Ds | Es=1&quot;, xlab=&quot;&quot;, breaks=20)
@@ -189,7 +190,7 @@ image(t(cBSC$n3$E), col=c(&quot;grey&quot;, &quot;darkred&quot;), axes = FALSE, 
 </div>
 <div id="analysis-with-copy-number-alterations" class="section level3">
 <h3>Analysis with copy number alterations</h3>
-<p>Next we conduct similar anlaysis using the simulated data with copy number alterations.</p>
+<p>Next we conduct similar analysis using the simulated data with copy number alterations.</p>
 <pre class="r"><code>load(&quot;basic/data/simulation_SCS_bulk_with_cn.RData&quot;)
 
 b.trec    = simu.bulk$trec
@@ -212,10 +213,10 @@ dim(mutations)</code></pre>
 ## 5586 7781 6633</code></pre>
 <p>Single cell only analysis.</p>
 <pre class="r"><code>cd1 = cluster.SCS(mutations, asrec, trec, nclusters=2:5)</code></pre>
-<pre><code>## nclust = 2, time: Wed Jan 23 21:47:51 2019</code></pre>
-<pre><code>## nclust = 3, time: Wed Jan 23 21:49:07 2019</code></pre>
-<pre><code>## nclust = 4, time: Wed Jan 23 21:50:23 2019</code></pre>
-<pre><code>## nclust = 5, time: Wed Jan 23 21:51:24 2019</code></pre>
+<pre><code>## nclust = 2, time: Wed Feb  6 15:39:24 2019</code></pre>
+<pre><code>## nclust = 3, time: Wed Feb  6 15:40:55 2019</code></pre>
+<pre><code>## nclust = 4, time: Wed Feb  6 15:42:21 2019</code></pre>
+<pre><code>## nclust = 5, time: Wed Feb  6 15:43:31 2019</code></pre>
 <pre class="r"><code>cd1$summary.cluster</code></pre>
 <pre><code>##    nclust      AIC      BIC  nIt
 ## n2      2 49334.05 49658.09 1000
@@ -227,10 +228,10 @@ dim(mutations)</code></pre>
                     nclusters=2:5)</code></pre>
 <pre><code>## initialize mutation calls in single cells</code></pre>
 <pre><code>## </code></pre>
-<pre><code>## nclust = 2, time: Wed Jan 23 22:01:53 2019</code></pre>
-<pre><code>## nclust = 3, time: Wed Jan 23 22:03:20 2019</code></pre>
-<pre><code>## nclust = 4, time: Wed Jan 23 22:04:31 2019</code></pre>
-<pre><code>## nclust = 5, time: Wed Jan 23 22:05:15 2019</code></pre>
+<pre><code>## nclust = 2, time: Wed Feb  6 15:54:22 2019</code></pre>
+<pre><code>## nclust = 3, time: Wed Feb  6 15:55:47 2019</code></pre>
+<pre><code>## nclust = 4, time: Wed Feb  6 15:56:55 2019</code></pre>
+<pre><code>## nclust = 5, time: Wed Feb  6 15:57:39 2019</code></pre>
 <pre class="r"><code>cBSC$summary.cluster</code></pre>
 <pre><code>##    nclust      AIC      BIC  nIt
 ## n2      2 55184.99 55518.99 1000
@@ -242,17 +243,17 @@ cBSC2 = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec,
                     nclusters=2:5)</code></pre>
 <pre><code>## initialize mutation calls in single cells</code></pre>
 <pre><code>## </code></pre>
-<pre><code>## nclust = 2, time: Wed Jan 23 22:16:48 2019</code></pre>
-<pre><code>## nclust = 3, time: Wed Jan 23 22:17:38 2019</code></pre>
-<pre><code>## nclust = 4, time: Wed Jan 23 22:18:52 2019</code></pre>
-<pre><code>## nclust = 5, time: Wed Jan 23 22:20:39 2019</code></pre>
+<pre><code>## nclust = 2, time: Wed Feb  6 16:09:02 2019</code></pre>
+<pre><code>## nclust = 3, time: Wed Feb  6 16:09:49 2019</code></pre>
+<pre><code>## nclust = 4, time: Wed Feb  6 16:11:02 2019</code></pre>
+<pre><code>## nclust = 5, time: Wed Feb  6 16:12:47 2019</code></pre>
 <pre class="r"><code>cBSC2$summary.cluster</code></pre>
 <pre><code>##    nclust      AIC      BIC  nIt
 ## n2      2 60387.17 60721.16  549
 ## n3      3 58635.54 59144.48  750
 ## n4      4 54801.24 55485.14  994
 ## n5      5 56911.57 57770.42 1000</code></pre>
-<p>We compare the clustr mean estimations (<code>gamma</code>’s) versus the its true values.</p>
+<p>We compare the cluster mean estimations (<code>gamma</code>’s) versus the its true values.</p>
 <pre class="r"><code>gamma.pi = 0.95
 M0 = 20
 

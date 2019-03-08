@@ -1,17 +1,17 @@
 ---
 title: "BaSiC-simulation-comparison"
 author: "Wei Sun"
-date: "1/22/2019"
+date: "`r Sys.Date()`"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This R markdown file illustrate the usage of R package ```basic``` using simulated data, as described in our paper: Sun et al. (2019) Joint Analysis of Single Cell and Bulk Tissue Sequencing Data to Infer Intra-Tumor Heterogeneity. Here we evalute two alternative methods: B-SCITE and PhyloWGS. 
+This R markdown file illustrate the usage of R package ```basic``` using simulated data, as described in our paper: Sun et al. (2019) Joint Analysis of Single Cell and Bulk Tissue Sequencing Data to Infer Intra-Tumor Heterogeneity. Here we evaluate two alternative methods: B-SCITE and PhyloWGS. 
 
 ```{r libraries, warning = FALSE, message = FALSE}
 library(basic)
@@ -62,7 +62,7 @@ write.table(bulk, file = "basic/data/B-SCITE_bulkFile_n_1000.txt",
             row.names = FALSE, col.names = TRUE)
 ```
 
-B-SCITE is designed for more detailed studies of a small number of mutations because it search all the possible mutation trees and the number of mutation trees increases super-exponetially with the number of mutations. Therefore analyzing 1000 mutations is computational challenging of B-SCITE. In our expereince, running B-SCITE for 1000 mutations will take more than 3 days and the resutls can be unstable across runs.  So we generate a smaller dataset by randomly sample 100 mutations. 
+B-SCITE is designed for more detailed studies of a small number of mutations because it searches all the possible mutation trees and the number of mutation trees increases super-exponentially with the number of mutations. Therefore analyzing 1000 mutations is computational challenging of B-SCITE. In our experience, running B-SCITE for 1000 mutations will take more than 3 days and the results can be unstable across runs.  So we generate a smaller dataset by randomly sample 100 mutations. 
 
 ```{r prepare_sc_data2}
 set.seed(2020)
@@ -94,7 +94,7 @@ cBSC = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters=2:5)
 cBSC$summary.cluster
 ```
 
-To summarize the results from BaSiC, we first generate the true clsuter membership: the first 600 mutations belong to cluster 1, 601-800 for cluster 2, 801-900 for cluster 3, and 901-1000 for cluster 4. Based on AIC, BaSiC chose 5 clusters. They are very well aligned with the 4 true clusters, except that the 1st true cluster is splitted into two clusters by BaSiC. 
+To summarize the results from BaSiC, we first generate the true cluster membership: the first 600 mutations belong to cluster 1, 601-800 for cluster 2, 801-900 for cluster 3, and 901-1000 for cluster 4. Based on AIC, BaSiC chose 5 clusters. They are very well aligned with the 4 true clusters, except that the 1st true cluster is split into two clusters by BaSiC. 
 ```{r basic_summary}
 n1 = sum(s100 <= 600)
 n2 = sum(s100 <= 800) - n1
@@ -124,7 +124,7 @@ image(t(cBSC$n5$E), col=c("grey", "darkred"), axes = FALSE, xlab="Cells",
 
 ### Run B-SCITE
 
-We downloaded the B-SCITE package from https://github.com/smalikic/B-SCITE. Then we compiled it following the instruction at https://github.com/smalikic/B-SCITE, and ran the analysis using command ```python run_B-SCITE.py```. We modified the code ```run_B-SCITE.py``` for our anlaysis to update the path for input files. In addition, we changed the line of ```run_command += "-SCFileLocation "   + SCFile   + " "``` to be ```run_command += "-i "   + SCFile   + " "```. This is because in the cpp source code, the single cell data file is provided through ```-i```.  Without this update, we encountered an error message ```unknown parameter -SCFileLocation```. 
+We downloaded the B-SCITE package from https://github.com/smalikic/B-SCITE. Then we compiled it following the instruction at https://github.com/smalikic/B-SCITE, and ran the analysis using command ```python run_B-SCITE.py```. We modified the code ```run_B-SCITE.py``` for our analysis to update the path for input files. In addition, we changed the line of ```run_command += "-SCFileLocation "   + SCFile   + " "``` to be ```run_command += "-i "   + SCFile   + " "```. This is because in the cpp source code, the single cell data file is provided through ```-i```.  Without this update, we encountered an error message ```unknown parameter -SCFileLocation```. 
 
 ```{python, eval=FALSE}
 import sys
@@ -234,7 +234,7 @@ gunzip data/*/*.gz
 python index_data.py
 python -m SimpleHTTPServer
 ```
-Then the results can be viewed from http://127.0.0.1:8000 in your browser. Here are a few screenshot of the results. The first plot shows the phylogenetic tree. As expected, PhyloWGS identify three subclones and cannot seperate the two subclones with very similar cellular frequencies. Here simulated subclone 3 and 4 were combined into subclone 3. 
+Then the results can be viewed from http://127.0.0.1:8000 in your browser. Here are a few screenshots of the results. The first plot shows the phylogenetic tree. As expected, PhyloWGS identify three subclones and cannot separate the two subclones with very similar cellular frequencies. Here simulated subclone 3 and 4 were combined into subclone 3. 
 
 ```{r, out.width = "80%", echo=FALSE}
 include_graphics("ex_figures/ex_simu_PhyloWGS_tree.png")
@@ -246,4 +246,7 @@ Next plot shows the the number of subclones across all trees sampled by PhyloGWS
 include_graphics("ex_figures/ex_simu_PhyloWGS_n_subclone.png")
 ```
 
+```{r}
+sessionInfo()
+```
 

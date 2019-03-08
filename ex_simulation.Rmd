@@ -1,7 +1,7 @@
 ---
 title: "BaSiC-simulation"
 author: "Wei Sun"
-date: "1/22/2019"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
@@ -43,7 +43,7 @@ Es = simu.SCS$true.mutations
 cBSC$summary.cluster
 ```
 
-From the summary of above analayis, both AIC and BIC suggest that there are three clusters. Next we visualize the distribution of estimated mutation status (```Ehats```) vs. the true mutation status (```E```). 
+From the summary of above analysis, both AIC and BIC suggest that there are three clusters. Next we visualize the distribution of estimated mutation status (```Ehats```) vs. the true mutation status (```E```). 
 
 ```{r plot1, fig.width=6, fig.height=6}
 par(mfrow=c(2,2), mar=c(4,4,2,1))
@@ -65,7 +65,7 @@ image(t(cBSC$n3$E), col=c("grey", "darkred"), axes = FALSE, xlab="Cells",
 ```
 
 ### Analysis with copy number alterations
-Next we conduct similar anlaysis using the simulated data with copy number alterations.
+Next we conduct similar analysis using the simulated data with copy number alterations.
 ```{r load_data_cna}
 load("basic/data/simulation_SCS_bulk_with_cn.RData")
 
@@ -101,7 +101,7 @@ cBSC2 = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec,
 cBSC2$summary.cluster
 ```
 
-We compare the clustr mean estimations (```gamma```'s) versus the its true values. 
+We compare the cluster mean estimations (```gamma```'s) versus the its true values. 
 
 ```{r compare_cluster_mean, fig.width=6, fig.height=8}
 gamma.pi = 0.95
