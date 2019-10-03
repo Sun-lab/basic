@@ -62,7 +62,7 @@ java -Xmx7g -jar GenomeAnalysisTK-3.6/GenomeAnalysisTK.jar \
 First read in the somatic mutaton calls and read-depth information from bulk tumor. 
 ```{r load_bulk_data}
 
-mutBk = read.table("basic/data/Final_Mutation_Calls_with_counts", sep="\t", 
+mutBk = read.table("data/Final_Mutation_Calls_with_counts.tsv", sep="\t", 
                   as.is=TRUE, header=TRUE)
 dim(mutBk)
 mutBk[1:2,]
@@ -79,7 +79,7 @@ Next we read in the single cell data
 mutS = clustS = gL = list()
 
 for(i in 1:6){
-  fname = sprintf("basic/data/pat_%d_cluster_dat", i)
+  fname = sprintf("data/pat_%d_cluster_dat", i)
   mut.i = read.table(fname, header=TRUE)
   mut.i = data.matrix(mut.i)
   t1    = mut.i[,which(colnames(mut.i) != "clusters")]

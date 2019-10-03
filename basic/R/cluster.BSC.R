@@ -209,14 +209,19 @@ function(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters,
     
     for(j in 1:mm){
       if(is.na(mutations[i,j])){
+        
+        f1  = dbetabinom(asrec[i,j], trec[i,j], prob=pi1, rho=rho1)
+        f2  = dbetabinom(asrec[i,j], trec[i,j], prob=pi2, rho=rho2)
+        f3  = dbetabinom(asrec[i,j], trec[i,j], prob=pi3, rho=rho3)
+        
         if(trec[i,j] >= 3){
-          f1  = dbetabinom(asrec[i,j], trec[i,j], prob=pi1, rho=rho1)
-          f2  = dbetabinom(asrec[i,j], trec[i,j], prob=pi2, rho=rho2)
-          f3  = dbetabinom(asrec[i,j], trec[i,j], prob=pi3, rho=rho3)
           Ds[i,j] = (psi2*f2 + psi3*f3)/(psi1*f1 + psi2*f2 + psi3*f3)
+          pR.D0[i,j] = f1
+          pR.D1[i,j] = psi2p*f2 + psi3p*f3
+        }else{
+          pR.D0[i,j] = 1.0
+          pR.D1[i,j] = 1.0
         }
-        pR.D0[i,j] = f1
-        pR.D1[i,j] = psi2p*f2 + psi3p*f3
       }
     }
   }

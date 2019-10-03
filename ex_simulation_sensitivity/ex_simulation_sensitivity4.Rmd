@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This R markdown file illustrate the usage of R package ```basic``` using simulated data, as described in our paper: Sun et al. (2019) Joint Analysis of Single Cell and Bulk Tissue Sequencing Data to Infer Intra-Tumor Heterogeneity. 
+This R markdown file modify the basic simulation anlaysis in ex_simulation.Rmd to perform a sensitivity analyses: adjusting the read-depth cutoff to call mutations to be 24.
 
 ```{r libraries, warning = FALSE, message = FALSE}
 library(basic)
@@ -28,23 +28,24 @@ b.trec    = simu.bulk$trec
 b.asrec   = simu.bulk$asrec
 b.cn      = rep(2, length(b.trec))
 
-mutations = simu.SCS$observed.mutation
+mutations = simu.SCS$observed.mutation.nomissing
 trec      = simu.SCS$trec
 asrec     = simu.SCS$asrec
 
 dim(mutations)
 mutations[1:2,1:3]
-table(is.na(mutations))
 
-cBSC = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec, 
-                   nclusters=2:5)
+mutations[which(trec <= 24)] = NA
+table(mutations, useNA="ifany")
+
+cBSC = cluster.BSC(b.cn, b.asrec, b.trec, mutations, asrec, trec, nclusters=2:5)
 
 Ds = simu.SCS$observed.mutation
 Es = simu.SCS$true.mutations
 cBSC$summary.cluster
 ```
 
-From the summary of above analysis, both AIC and BIC suggest that there are three clusters. Next we visualize the distribution of estimated mutation status (```Ehats```) vs. the true mutation status (```E```). 
+From the summary of above analysis, both AIC and BIC suggest that there are four clusters. Next we visualize the distribution of estimated mutation status (```Ehats```) vs. the true mutation status (```E```). 
 
 ```{r plot1, fig.width=6, fig.height=6}
 par(mfrow=c(2,2), mar=c(4,4,2,1))
@@ -74,12 +75,14 @@ b.trec    = simu.bulk$trec
 b.asrec   = simu.bulk$asrec
 b.cn      = simu.bulk$cn
 
-mutations = simu.SCS$observed.mutation
 trec      = simu.SCS$trec
 asrec     = simu.SCS$asrec
+mutations = simu.SCS$observed.mutation.nomissing
 
 dim(mutations)
 mutations[1:2,1:3]
+
+mutations[which(trec <= 24)] = NA
 table(c(mutations), useNA="ifany")
 ```
 
@@ -126,10 +129,10 @@ gamma
 g1 = ggcorrplot(t(gamma), tl.cex=10, lab = FALSE, legend.title="") + 
   ggtitle('True configuration' ) + theme(plot.title = element_text(size = 10))
 
-g2 = ggcorrplot(cd1[["n5"]]$gamma, tl.cex=10, lab=FALSE, legend.title="") + 
+g2 = ggcorrplot(cd1[["n4"]]$gamma, tl.cex=10, lab=FALSE, legend.title="") + 
   ggtitle('SCS only' ) + theme(plot.title = element_text(size = 10))
 
-gamma2 = cBSC2[["n4"]]$gamma[,c(1,2,4,3)]
+gamma2 = cBSC2[["n4"]]$gamma
 g3 = ggcorrplot(gamma2, tl.cex=10, lab=FALSE, legend.title="") + 
   ggtitle('Bulk tumor + SCS, without CNA information' ) + 
   theme(plot.title = element_text(size = 10))
@@ -146,8 +149,8 @@ Finally we compare the cluster membership of each method versus the true cluster
 round(cBSC2$n4$gammas,2)
 
 mut1 = c(rep(1,600), rep(2,200), rep(3,100), rep(4,100))
-mut2 = apply(cd1$n5$postPs, 1, which.max)
-mut3 = apply(cBSC2$n4$postPs[,c(1,2,4,3)], 1, which.max)
+mut2 = apply(cd1$n3$postPs, 1, which.max)
+mut3 = apply(cBSC2$n4$postPs, 1, which.max)
 mut4 = apply(cBSC$n4$postPs, 1, which.max)
 
 t2 = table(mut1, mut2)
@@ -156,10 +159,9 @@ t4 = table(mut1, mut4)
 ts = cbind(t2, t3, t4)
 ts
 
-match0 = (mut1==1 & mut2==2) | (mut1==3 & mut2==5) | (mut1==4 & mut2==4)
-table(match0)/length(mut1)
-table(mut1 == mut3)/length(mut1)
-table(mut1 == mut4)/length(mut1)
+sum(apply(t2, 2, max))/length(mut1)
+sum(apply(t3, 2, max))/length(mut1)
+sum(apply(t4, 2, max))/length(mut1)
 ```
 
 

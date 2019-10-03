@@ -41,7 +41,18 @@ table(c(mutations.sc), useNA="ifany")
 table(is.na(mutations.sc))/12624
 ```
 
-Next we cluster the mutations based on the data from single cells. This involves imputing the missing values in single cell mutation calls. We evaluate the results with number of clusters being 2, 3, or 4. In the following results, ```scs$n2``` and ```scs$n3``` indicate results for 2 or 3 clusters, respectively.   
+To cluster the mutations based on the data from single cells, we first use K-mean clustering. 
+
+```{r scs-kmean}
+mutations.sc.naive = mutations.sc
+mutations.sc.naive[which(is.na(mutations.sc))] = 0
+km = kmeans(mutations.sc.naive, centers=2)
+
+names(km)
+table(km$cluster)
+```
+
+Next we cluster the mutations using our method. This involves imputing the missing values in single cell mutation calls. We evaluate the results with number of clusters being 2, 3, or 4. In the following results, ```scs$n2``` and ```scs$n3``` indicate results for 2 or 3 clusters, respectively.   
 ```{r scs}
 scs = cluster.SCS(mutations.sc, asrec, trec, nclust=2:4, verbose=0)
 
@@ -93,9 +104,13 @@ g1 = ggcorrplot(cBSC$n2$gamma, tl.cex=10, lab = FALSE, show.legend=F) +
 g2 = ggcorrplot(cBSC2$n3$gamma, tl.cex=10, lab = FALSE, show.legend=F) + 
   ggtitle("BaSiC w/o CNA") + theme(plot.title = element_text(size = 10))
 
+g3 = ggcorrplot(t(km$centers), tl.cex=10, lab = FALSE, show.legend=F) + 
+  ggtitle("Kmeans") + theme(plot.title = element_text(size = 10))
+
 g0
 g1
 g2
+g3
 ```
 
 
@@ -109,12 +124,14 @@ colSums(cBSC2$n3$postPs)
 mut.scs = apply(scs$n2$postPs, 1, which.max)
 mut.bsc = apply(cBSC$n2$postPs, 1, which.max)
 mut.bsc.nocn = apply(cBSC2$n3$postPs, 1, which.max)
+mut.kmeans = km$cluster
 
 t2 = table(mut.bsc, mut.scs)
 t3 = table(mut.bsc, mut.bsc.nocn)
 t4 = table(mut.scs, mut.bsc.nocn)
+t5 = table(mut.bsc, mut.kmeans)
 
-ts = cbind(t2, t3)
+ts = cbind(t2, t3, t5)
 ts
 t4
 ```

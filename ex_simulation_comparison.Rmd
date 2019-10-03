@@ -18,6 +18,8 @@ library(basic)
 library(ggcorrplot)
 library(gridExtra)
 library(knitr)
+library(reticulate)
+library(Rgraphviz)
 ```
 
 ## B-SCITE
@@ -37,7 +39,7 @@ table(c(mutations), useNA="ifany")
 mutations[which(is.na(mutations))] = 3
 table(c(mutations), useNA="ifany")
 
-write.table(mutations, file = "basic/data/B-SCITE_SCFile_n_1000_m_20.txt", 
+write.table(mutations, file = "data/B-SCITE_SCFile_n_1000_m_20.txt", 
             append = FALSE, quote = FALSE, sep = "\t", 
             row.names = FALSE, col.names = FALSE)
 ```
@@ -57,7 +59,7 @@ bulk$INFO = paste0("ID=mut", 1:n, ";")
 dim(bulk)
 bulk[1:2,]
 
-write.table(bulk, file = "basic/data/B-SCITE_bulkFile_n_1000.txt", 
+write.table(bulk, file = "data/B-SCITE_bulkFile_n_1000.txt", 
             append = FALSE, quote = FALSE, sep = "\t", 
             row.names = FALSE, col.names = TRUE)
 ```
@@ -68,11 +70,11 @@ B-SCITE is designed for more detailed studies of a small number of mutations bec
 set.seed(2020)
 s100 = sort(sample(nrow(mutations), 100))
 
-write.table(mutations[s100,], file = "basic/data/B-SCITE_SCFile_n_100_m_20.txt", 
+write.table(mutations[s100,], file = "data/B-SCITE_SCFile_n_100_m_20.txt", 
             append = FALSE, quote = FALSE, sep = "\t", 
             row.names = FALSE, col.names = FALSE)
 
-write.table(bulk[s100,], file = "basic/data/B-SCITE_bulkFile_n_100.txt", 
+write.table(bulk[s100,], file = "data/B-SCITE_bulkFile_n_100.txt", 
             append = FALSE, quote = FALSE, sep = "\t", 
             row.names = FALSE, col.names = TRUE)
 ```
@@ -161,8 +163,7 @@ Here we summarize the results of B-SCITE by a plot. The correct cluster is 1-61,
 ```{r bscite_summarize, warning = FALSE, message = FALSE, fig.height=20, fig.width=8}
 cumsum(c(n1, n2, n3, n4))
 
-library(Rgraphviz)
-g1 = agread("basic/data/basic_simulation_100_ml0.gv")
+g1 = agread("data/basic_simulation_100_ml0.gv")
 cols = rep(c("lightblue", "grey", "lightyellow", "lightgreen"),
            times=c(n1,n2,n3,n4))
 names(cols) = 1:100
@@ -189,12 +190,12 @@ par(mar=c(5,4,1,1))
 hist(bulk2$a/bulk2$d, xlab="total depth", ylab="reference depth", 
      breaks=20, main="")
 
-write.table(bulk2, file = "basic/data/PhyloWGS_ssm_data.txt", 
+write.table(bulk2, file = "data/PhyloWGS_ssm_data.txt", 
             append = FALSE, quote = FALSE, sep = "\t", 
             row.names = FALSE, col.names = TRUE)
 
-if(file.exists("PhyloWGS_cnv_data.txt")){ system("rm PhyloWGS_cnv_data.txt") }
-system("touch PhyloWGS_cnv_data.txt")
+if(file.exists("data/PhyloWGS_cnv_data.txt")){ system("rm data/PhyloWGS_cnv_data.txt") }
+system("touch data/PhyloWGS_cnv_data.txt")
 ```
 
 ### Run PhyloWGS

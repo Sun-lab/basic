@@ -12,8 +12,8 @@ function(y1, z1, y2, z2, cn1=NULL, cn2=NULL){
   D   = b*b - cn1*cn2*(y1 + y2)*(z1 + z2)
   r12 = (b - sqrt(D))/(2*(z1 + z2))
   
-  if(any(r1 < 0 | r1 > 1)){ stop("invalid values for y1 or z1") }
-  if(any(r2 < 0 | r2 > 1)){ stop("invalid values for y2 or z2") }
+  if(any(r1 < 0 | r1 > 1)){ warning("invalid values for y1, z1, or cn1") }
+  if(any(r2 < 0 | r2 > 1)){ warning("invalid values for y2, z2, or cn2") }
 
   r1[which(r1 <= 1e-5)] = 1e-5
   r1[which(r1 >= 1-1e-5)] = 1-1e-5

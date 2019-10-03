@@ -1,0 +1,97 @@
+---
+title: "BaSiC-simulation"
+author: "Wei Sun"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R markdown file modify the basic simulation anlaysis in ex_simulation.Rmd to perform a sensitivity analyses: add noise to copy number calls
+
+```{r libraries, warning = FALSE, message = FALSE}
+library(basic)
+library(ggcorrplot)
+library(gridExtra)
+```
+
+
+### Analysis with copy number alterations
+We first load the simulated data with copy number alterations, and then add noise into the copy number data. Here we randomly take 20% of loci and randomly assign their copy numbers. 
+```{r load_data_cna}
+load("basic/data/simulation_SCS_bulk_with_cn.RData")
+
+b.trec    = simu.bulk$trec
+b.asrec   = simu.bulk$asrec
+b.cn      = simu.bulk$cn
+
+table(b.cn)
+set.seed(999)
+w2pertrub = sample(length(b.cn), size = round(0.2*length(b.cn)))
+b.cn[w2pertrub] = sample(1:3, size=length(w2pertrub), replace=TRUE)
+table(b.cn, simu.bulk$cn)
+
+trec      = simu.SCS$trec
+asrec     = simu.SCS$asrec
+mutations = simu.SCS$observed.mutation
+
+dim(mutations)
+mutations[1:2,1:3]
+```
+
+Joint analysis of bulk and scDNA-seq with CNA information.
+
+```{r analysis_cna_basic}
+suppressWarnings({cBSC  = cluster.BSC(b.cn, b.asrec, b.trec, mutations, 
+                                     asrec, trec, nclusters=2:5)})
+cBSC$summary.cluster
+```
+
+We compare the cluster mean estimations (```gamma```'s) versus the its true values. 
+
+```{r compare_cluster_mean, fig.width=6, fig.height=8}
+gamma.pi = 0.95
+M0 = 20
+
+scGroups = rep(NA, M0)
+scGroups[1:2] = 1
+scGroups[3:4] = 2
+scGroups[5:12] = 3
+scGroups[13:20] = 4
+
+table(scGroups)
+
+gamma = matrix(1-gamma.pi, nrow=4, ncol=M0)
+gamma[1,] = rep(gamma.pi, M0)
+gamma[2,which(scGroups >= 2)] = gamma.pi
+gamma[3,which(scGroups == 3)] = gamma.pi
+gamma[4,which(scGroups == 4)] = gamma.pi
+gamma
+
+g1 = ggcorrplot(t(gamma), tl.cex=10, lab = FALSE, legend.title="") + 
+  ggtitle('True configuration' ) + theme(plot.title = element_text(size = 10))
+
+g4 = ggcorrplot(cBSC[["n4"]]$gamma, tl.cex=10, lab=FALSE, legend.title="") + 
+  ggtitle('Bulk tumor + SCS, with CNA information' ) +
+  theme(plot.title = element_text(size = 10))
+
+grid.arrange(g1, g4, nrow = 2)
+```
+
+Finally we compare the cluster membership of each method versus the true cluster membership. 
+```{r compare_cluster_membership, fig.width=6, fig.height=8}
+mut1 = c(rep(1,600), rep(2,200), rep(3,100), rep(4,100))
+mut4 = apply(cBSC$n4$postPs, 1, which.max)
+
+t4 = table(mut1, mut4)
+t4
+
+sum(apply(t4, 2, max))/length(mut1)
+```
+
+
+```{r}
+sessionInfo()
+```

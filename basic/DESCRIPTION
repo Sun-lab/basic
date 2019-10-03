@@ -10,4 +10,4 @@ Description: Inference of intra-tumor-heterogeneity by sequencing data from Bulk
 Depends: VGAM, MASS
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2017-11-10 05:51:12 UTC; wsun
+Packaged: 2019-10-01 22:31:12 UTC; wsun
