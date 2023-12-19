@@ -13,7 +13,7 @@ To install this package in R, use
  
 ```R
 library("devtools");
-install_github("Sun-lab/basic")
+install_github("Sun-lab/basic/basic")
 ```
 ### Content
 
