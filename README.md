@@ -7,6 +7,16 @@ The main goal is to cluster somatic mutations based on their Mutant Allele Frequ
 
 An important novelty of our method is to based on observations that the percentage of missing values of somatic mutation calls from single cells are highly depend on read-depth information. Therefore we incorporate read-depth information to recover some missed somatic mutation calls. 
 
+### Installation
+
+To install this package in R, use 
+ 
+```R
+library("devtools");
+install_github("Sun-lab/basic")
+```
+### Content
+
 Here is the file structure of this repository
 ```
 .
